@@ -128,7 +128,7 @@ class APACHE extends ConfigGenerator {
     ServerAdmin webmaster@{$hostname}
     ServerName  {$hostname}
     ServerAlias www.{$hostname}';
-        if ($ssl_is_enable) {
+        if ($this->ssl_cert) {
             
             $template .= '
         SSLEngine on
@@ -137,7 +137,7 @@ class APACHE extends ConfigGenerator {
         SSLCertificateKeyFile {$certdir}/www.{$hostname}.key
         SSLCertificateChainFile  {$certdir}/intermediate.ca-crt
         ';
-            $template = str_replace('{$certdir}', $certs_dir, $template);
+            $template = str_replace('{$certdir}', $this->cert_dir, $template);
         }
         
         $template .= '
